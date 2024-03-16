@@ -2,6 +2,8 @@ How to trigger the data enhancement pipeline.
 
 Start the springboot service using the following command
 ```
+git clone git@github.com:SaraJendeberg/enhancer.git
+cd enhancer
 ./mvnw spring-boot:run
 ```
 
