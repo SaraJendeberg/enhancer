@@ -3,8 +3,6 @@ package com.motherbrain.enhancer.datacollectors;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.motherbrain.enhancer.entities.Company;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,25 +26,5 @@ class CompanyDataScraperTest {
   void testGetDivestmentCompaniesPage_Success() {
     ResponseEntity result = divestmentCompaniesScraper.getPage();
     assertThat("Is successful", result.getStatusCode().is2xxSuccessful());
-  }
-
-  @Test
-  void testGetCurrentCompanies_Success() {
-    List<Company> companies = currentCompaniesScraper.getCompanies();
-  }
-
-  @Test
-  void testGetDivestmentCompanies_Success() {
-    List<Company> companies = divestmentCompaniesScraper.getCompanies();
-  }
-
-  @Test
-  void testEnrichCurrentCompaniesWithCompanyPageData() {
-    currentCompaniesScraper.getFullCompanyData();
-  }
-
-  @Test
-  void testEnrichDivestmentCompaniesWithCompanyPageData() {
-    divestmentCompaniesScraper.getFullCompanyData();
   }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.motherbrain.enhancer.datacollectors.CompanyDataScraper;
 import com.motherbrain.enhancer.datacollectors.JsonFileReader;
 import com.motherbrain.enhancer.entities.*;
+import com.motherbrain.enhancer.export.JsonDataExporter;
 import com.motherbrain.enhancer.matchers.StringMatcher;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,7 @@ class DataEnhancerService {
   private CompanyDataScraper currentCompaniesScraper;
   private CompanyDataScraper divestmentCompaniesScraper;
   private JsonFileReader jsonFileReader;
+  private JsonDataExporter jsonDataExporter;
   private ObjectMapper mapper;
   private List<Company> companies;
   StringMatcher stringMatcher;
@@ -26,11 +28,13 @@ class DataEnhancerService {
       @Autowired CompanyDataScraper currentCompaniesScraper,
       @Autowired CompanyDataScraper divestmentCompaniesScraper,
       @Autowired JsonFileReader jsonFileReader,
+      @Autowired JsonDataExporter jsonDataExporter,
       @Autowired ObjectMapper mapper)
       throws IOException {
     this.currentCompaniesScraper = currentCompaniesScraper;
     this.divestmentCompaniesScraper = divestmentCompaniesScraper;
     this.jsonFileReader = jsonFileReader;
+    this.jsonDataExporter = jsonDataExporter;
     this.mapper = mapper;
     this.companies = new ArrayList<>();
     this.stringMatcher = new StringMatcher();
@@ -50,7 +54,7 @@ class DataEnhancerService {
     enhanceCompanyData(fundings, organisationDetails);
 
     // Export
-    exportCompanyData();
+    jsonDataExporter.export(companies, "company-data-output.json");
 
     System.out.println("Pipeline ended.");
   }
@@ -94,16 +98,5 @@ class DataEnhancerService {
           }
         });
     System.out.println("ORGANISATION MATCHES : " + countOrganisationMatches.get());
-  }
-
-  private void exportCompanyData() {
-    System.out.println("Exporting enhanced data to json file...");
-    String filePath = "company-data-output.json";
-    try {
-      mapper.writeValue(new File(filePath), companies);
-      System.out.println("Objects converted to JSON and written to " + filePath);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 }
