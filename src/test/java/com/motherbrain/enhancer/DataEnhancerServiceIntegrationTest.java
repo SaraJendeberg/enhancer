@@ -14,7 +14,8 @@ class DataEnhancerServiceIntegrationTest {
   @Autowired CompanyDataScraper divestmentCompaniesScraper;
   @Autowired ObjectMapper mapper;
   @Autowired JsonFileReader jsonFileReader;
-  @Autowired DataEnhancerService dataEnhancerService;
+  @Autowired
+  private DataEnhancerService dataEnhancerService;
 
   DataEnhancerServiceIntegrationTest() throws IOException {}
 

@@ -80,7 +80,7 @@ class DataEnhancerService {
   }
 
   private void enhanceWithOrganisation(List<Organisation> organisations) {
-    System.out.println("Enhancing organisation data...");
+    System.out.println("Enhancing with organisation data...");
     AtomicInteger countOrganisationMatches = new AtomicInteger();
     companies.forEach(
         company -> {

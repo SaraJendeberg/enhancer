@@ -25,11 +25,11 @@ public class Funding {
   String investmentType;
 
   @JsonProperty("announced_on")
-  Date announcedOn;
+  String announcedOn; //TODO: use Date
 
   @JsonProperty("raised_amount_usd")
   String raisedAmountUsd;
 
   @JsonProperty("investor_names")
-  String investorNames; // TODO: this should be a set
+  String investorNames; // TODO: deserialize to Set
 }
