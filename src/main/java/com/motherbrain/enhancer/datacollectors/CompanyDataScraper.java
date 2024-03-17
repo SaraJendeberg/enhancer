@@ -110,7 +110,7 @@ public class CompanyDataScraper {
     }
   }
 
-  public ResponseEntity getPage() {
+  ResponseEntity getPage() {
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
     if (!response.getStatusCode().is2xxSuccessful()) {
       System.out.println("Failed to fetch data. Response code: " + response.getStatusCode());
