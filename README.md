@@ -1,4 +1,4 @@
-# How to trigger the pipelinee
+# How to trigger the pipeline
 ```
 git clone git@github.com:SaraJendeberg/enhancer.git
 cd enhancer
