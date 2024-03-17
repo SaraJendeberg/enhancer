@@ -11,18 +11,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JsonFileReader {
   private ObjectMapper mapper;
   private BufferedReader bufferedReader;
-  private static final String RESOURCES_FOLDER = "src/main/resources/";
+  private static String RESOURCES_FOLDER;
   private static final List<String> fileNames =
       List.of("interview-test-funding-2019.json", "interview-test-org-2019.json");
 
-  public JsonFileReader(@Autowired ObjectMapper mapper) throws FileNotFoundException {
+  public JsonFileReader(@Autowired ObjectMapper mapper,
+                        @Value("${resource.path}") String resourcePath) throws FileNotFoundException {
     this.mapper = mapper;
+    this.RESOURCES_FOLDER = resourcePath;
   }
 
   public List<Funding> parseFundings() throws IOException {

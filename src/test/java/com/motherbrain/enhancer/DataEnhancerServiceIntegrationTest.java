@@ -1,6 +1,7 @@
 package com.motherbrain.enhancer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.motherbrain.enhancer.DataEnhancerService;
 import com.motherbrain.enhancer.datacollectors.CompanyDataScraper;
 import com.motherbrain.enhancer.datacollectors.JsonFileReader;
 import java.io.IOException;

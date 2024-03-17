@@ -7,10 +7,6 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 public class StringMatcher {
     LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
 
-    /*public boolean matches(String s1, String s2){
-        return preTreat(s1).equals(preTreat(s2));
-    }*/
-
     public boolean matches(String s1, String s2){
         return levenshteinDistance.apply(preTreat(s1), preTreat(s2)) <= 1;
     }
@@ -49,6 +45,7 @@ public class StringMatcher {
      * ORGANISATION MATCHES : 275
      */
 
+    // #################### FINAL CHOICE ####################
     /** levenshteinDistance <= 1 and AB removed and lowercase and stripped
      * FUNDING MATCHES : 188
      * ORGANISATION MATCHES : 297

@@ -1,4 +1,4 @@
-package com.motherbrain.enhancer;
+package com.motherbrain.enhancer.datacollectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
