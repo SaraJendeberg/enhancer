@@ -19,7 +19,7 @@ class DataEnhancerService {
   private CompanyDataScraper currentCompaniesScraper;
   private CompanyDataScraper divestmentCompaniesScraper;
   private JsonFileReader jsonFileReader;
-  private JsonDataExporter jsonDataExporter;
+  private JsonDataExporter<Company> jsonDataExporter;
   private ObjectMapper mapper;
   private List<Company> companies;
   StringMatcher stringMatcher;
