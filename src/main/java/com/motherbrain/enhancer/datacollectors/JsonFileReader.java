@@ -26,10 +26,12 @@ public class JsonFileReader {
   }
 
   public List<Funding> parseFundings() throws IOException {
+    System.out.println("Parse funding reference data...");
     return parseData(Funding.class, "interview-test-funding-2019.json");
   }
 
   public List<Organisation> parseOrganisationDetails() throws IOException {
+    System.out.println("Parsing organisation reference data...");
     return parseData(Organisation.class, "interview-test-org-2019.json");
   }
 

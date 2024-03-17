@@ -34,7 +34,8 @@ class DataEnhancerService {
     this.jsonFileReader = jsonFileReader;
     this.mapper = mapper;
     this.companies = new ArrayList<>();
-    stringMatcher = new StringMatcher();
+    this.stringMatcher = new StringMatcher();
+
   }
 
   void runPipeline() throws IOException {
@@ -47,12 +48,17 @@ class DataEnhancerService {
     List<Funding> fundings = jsonFileReader.parseFundings();
     List<Organisation> organisationDetails = jsonFileReader.parseOrganisationDetails();
 
-    // Enhance Company Data
+    // Enhance
     enhanceCompanyData(fundings, organisationDetails);
 
-    // Export Company Data
+    // Export
     exportCompanyData();
+
     System.out.println("Pipeline ended.");
+  }
+
+  private void loadReferenceData(){
+
   }
 
   private void enhanceCompanyData(List<Funding> fundings, List<Organisation> organisationDetails) {
@@ -75,8 +81,7 @@ class DataEnhancerService {
             company.setFundings(matchedFundings);
           }
         });
-    System.out.println(
-        "---------------" + "FUNDING MATCHES : " + countFundingMatches.get());
+    System.out.println("FUNDING MATCHES : " + countFundingMatches.get());
   }
 
   private void enhanceWithOrganisation(List<Organisation> organisations) {
@@ -94,10 +99,7 @@ class DataEnhancerService {
             company.setOrganisationData(organisation);
           }
         });
-    System.out.println(
-        "---------------"
-            + "ORGANISATION MATCHES : "
-            + countOrganisationMatches.get());
+    System.out.println("ORGANISATION MATCHES : " + countOrganisationMatches.get());
   }
 
   private void exportCompanyData() {
