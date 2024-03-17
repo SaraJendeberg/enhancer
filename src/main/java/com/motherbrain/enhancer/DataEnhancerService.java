@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.apache.commons.text.similarity.LevenshteinDistance;
+
+import com.motherbrain.enhancer.matchers.StringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ class DataEnhancerService {
   private JsonFileReader jsonFileReader;
   private ObjectMapper mapper;
   private List<Company> companies;
-  LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+  StringMatcher stringMatcher;
 
   DataEnhancerService(
       @Autowired CompanyDataScraper currentCompaniesScraper,
@@ -33,6 +34,7 @@ class DataEnhancerService {
     this.jsonFileReader = jsonFileReader;
     this.mapper = mapper;
     this.companies = new ArrayList<>();
+    stringMatcher = new StringMatcher();
   }
 
   void runPipeline() throws IOException {
@@ -66,47 +68,35 @@ class DataEnhancerService {
         company -> {
           List<Funding> matchedFundings =
               fundings.stream()
-                  .filter(
-                      c ->
-                          c.getCompanyName()
-                              .toLowerCase()
-                              .contains(company.getTitle().toLowerCase()))
-                  .toList(); // fuzzy match as well?
+                  .filter(c -> stringMatcher.matches(c.getCompanyName(), company.getTitle()))
+                  .toList();
           if (!matchedFundings.isEmpty()) {
             countFundingMatches.getAndIncrement();
             company.setFundings(matchedFundings);
-          } else {
-            System.out.println(company.getTitle() + ": NO MATCH");
           }
         });
     System.out.println(
-        "---------------" + "COMPANY FUNDING MATCHES COUNT : " + countFundingMatches.get());
+        "---------------" + "FUNDING MATCHES : " + countFundingMatches.get());
   }
 
   private void enhanceWithOrganisation(List<Organisation> organisations) {
-    System.out.println("Enhancing organisation data");
+    System.out.println("Enhancing organisation data...");
     AtomicInteger countOrganisationMatches = new AtomicInteger();
     companies.forEach(
         company -> {
           Organisation organisation =
               organisations.stream()
-                  .filter(
-                      c ->
-                          c.getCompanyName()
-                              .toLowerCase()
-                              .contains(company.getTitle().toLowerCase()))
+                  .filter(c -> stringMatcher.matches(c.getCompanyName(), company.getTitle()))
                   .findAny()
                   .orElse(null);
           if (organisation != null) {
             countOrganisationMatches.getAndIncrement();
             company.setOrganisationData(organisation);
-          } else {
-            System.out.println(company.getTitle() + ": NO MATCH");
           }
         });
     System.out.println(
         "---------------"
-            + "COMPANY ORGANISATION MATCHES COUNT : "
+            + "ORGANISATION MATCHES : "
             + countOrganisationMatches.get());
   }
 

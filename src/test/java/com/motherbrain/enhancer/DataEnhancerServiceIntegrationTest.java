@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DataEnhancerServiceTest {
+class DataEnhancerServiceIntegrationTest {
   @Autowired CompanyDataScraper currentCompaniesScraper;
   @Autowired CompanyDataScraper divestmentCompaniesScraper;
   @Autowired ObjectMapper mapper;
   @Autowired JsonFileReader jsonFileReader;
   @Autowired DataEnhancerService dataEnhancerService;
 
-  DataEnhancerServiceTest() throws IOException {}
+  DataEnhancerServiceIntegrationTest() throws IOException {}
 
   @Test
   void testRunPipeline() throws IOException {
