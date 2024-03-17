@@ -6,7 +6,6 @@ import com.motherbrain.enhancer.datacollectors.JsonFileReader;
 import com.motherbrain.enhancer.entities.*;
 import com.motherbrain.enhancer.export.JsonDataExporter;
 import com.motherbrain.enhancer.matchers.StringMatcher;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
