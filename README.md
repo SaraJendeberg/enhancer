@@ -35,6 +35,6 @@ gzip -k company-data-output.json
 
 ### Future Work
 - When reading 2019 data files, add in alphabetical order to enable binary search on company name.
-- Parallellize: scraping web data and loading the reference data sets can be done on different threads.
+- Parallellize: scraping web data and loading the reference data sets can be done in parallell.
 - Stream data directly from GCS using com.google.cloud.google-cloud-storage.
-- Export the company data to GCS using the same lib. 
+- Export the company data to GCS using com.google.cloud.google-cloud-storage.
