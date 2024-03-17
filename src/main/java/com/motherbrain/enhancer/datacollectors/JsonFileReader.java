@@ -22,8 +22,9 @@ public class JsonFileReader {
   private static final List<String> fileNames =
       List.of("interview-test-funding-2019.json", "interview-test-org-2019.json");
 
-  public JsonFileReader(@Autowired ObjectMapper mapper,
-                        @Value("${resource.path}") String resourcePath) throws FileNotFoundException {
+  public JsonFileReader(
+      @Autowired ObjectMapper mapper, @Value("${resource.path}") String resourcePath)
+      throws FileNotFoundException {
     this.mapper = mapper;
     this.RESOURCES_FOLDER = resourcePath;
   }

@@ -3,7 +3,6 @@ package com.motherbrain.enhancer.datacollectors;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.motherbrain.enhancer.datacollectors.CompanyDataScraper;
 import com.motherbrain.enhancer.entities.Company;
 import java.util.List;
 import org.junit.jupiter.api.Test;

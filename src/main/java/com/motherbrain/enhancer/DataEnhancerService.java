@@ -4,13 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.motherbrain.enhancer.datacollectors.CompanyDataScraper;
 import com.motherbrain.enhancer.datacollectors.JsonFileReader;
 import com.motherbrain.enhancer.entities.*;
+import com.motherbrain.enhancer.matchers.StringMatcher;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import com.motherbrain.enhancer.matchers.StringMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +34,6 @@ class DataEnhancerService {
     this.mapper = mapper;
     this.companies = new ArrayList<>();
     this.stringMatcher = new StringMatcher();
-
   }
 
   void runPipeline() throws IOException {
@@ -55,10 +53,6 @@ class DataEnhancerService {
     exportCompanyData();
 
     System.out.println("Pipeline ended.");
-  }
-
-  private void loadReferenceData(){
-
   }
 
   private void enhanceCompanyData(List<Funding> fundings, List<Organisation> organisationDetails) {

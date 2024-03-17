@@ -1,7 +1,6 @@
 package com.motherbrain.enhancer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.motherbrain.enhancer.DataEnhancerService;
 import com.motherbrain.enhancer.datacollectors.CompanyDataScraper;
 import com.motherbrain.enhancer.datacollectors.JsonFileReader;
 import java.io.IOException;
@@ -15,8 +14,7 @@ class DataEnhancerServiceIntegrationTest {
   @Autowired CompanyDataScraper divestmentCompaniesScraper;
   @Autowired ObjectMapper mapper;
   @Autowired JsonFileReader jsonFileReader;
-  @Autowired
-  private DataEnhancerService dataEnhancerService;
+  @Autowired private DataEnhancerService dataEnhancerService;
 
   DataEnhancerServiceIntegrationTest() throws IOException {}
 
